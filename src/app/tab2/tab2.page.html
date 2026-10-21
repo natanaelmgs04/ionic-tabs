@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="page-header">
+      <div class="header-info">
+        <p class="header-eyebrow">Catálogo</p>
+        <h1 class="header-title">Séries</h1>
+      </div>
+      <div class="header-icon-wrap">
+        <ion-icon name="tv"></ion-icon>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="content-pad">
+
+    <div class="section-label">Em Destaque</div>
+
+    <div class="media-list" *ngIf="listaSeries">
+      <div
+        class="media-card"
+        *ngFor="let serie of listaSeries; let i = index"
+        [style.animation-delay]="(i * 60) + 'ms'"
+        (click)="ExibirSerie(serie)"
+      >
+        <div class="poster-wrap">
+          <img class="poster" [src]="serie.cartaz" *ngIf="serie.cartaz" loading="lazy" />
+          <div class="poster-placeholder" *ngIf="!serie.cartaz">
+            <ion-icon name="tv-off-outline"></ion-icon>
+          </div>
+          <div
+            class="score-badge"
+            [class.score-high]="serie.classificacao >= 7"
+            [class.score-mid]="serie.classificacao >= 5 && serie.classificacao < 7"
+            [class.score-low]="serie.classificacao < 5"
+          >
+            {{ serie.classificacao }}
+          </div>
+        </div>
+
+        <div class="card-body">
+          <h2 class="card-title">{{ serie.nome }}</h2>
+
+          <div class="meta-row">
+            <span class="meta-item">
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ serie.lancamento }}
+            </span>
+            <span class="meta-dot">·</span>
+            <span class="meta-item">
+              <ion-icon name="time-outline"></ion-icon>
+              {{ serie.duracao }}
+            </span>
+          </div>
+
+          <div class="genre-list">
+            <span class="genre-pill" *ngFor="let genero of serie.generos">{{ genero }}</span>
+          </div>
+
+          <button
+            class="fav-btn"
+            [class.active]="serie.favorito"
+            (click)="$event.stopPropagation(); exibirAlertaFavorito(serie)"
+          >
+            <ion-icon [name]="serie.favorito ? 'star' : 'star-outline'"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

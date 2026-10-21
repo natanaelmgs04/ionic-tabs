@@ -1,0 +1,69 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="page-header">
+      <div class="header-info">
+        <p class="header-eyebrow">Catálogo</p>
+        <h1 class="header-title">Atores</h1>
+      </div>
+      <div class="header-icon-wrap">
+        <ion-icon name="people"></ion-icon>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="content-pad">
+
+    <div class="section-label">Em Destaque</div>
+
+    <div class="media-list" *ngIf="listaAtores">
+      <div
+        class="actor-card"
+        *ngFor="let ator of listaAtores; let i = index"
+        [style.animation-delay]="(i * 60) + 'ms'"
+        (click)="ExibirAtor(ator)"
+      >
+        <div class="avatar-wrap">
+          <img class="avatar" [src]="ator.foto" *ngIf="ator.foto" loading="lazy" />
+          <div class="avatar-placeholder" *ngIf="!ator.foto">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+          <div
+            class="score-badge"
+            [class.score-high]="ator.popularidade >= 7"
+            [class.score-mid]="ator.popularidade >= 5 && ator.popularidade < 7"
+            [class.score-low]="ator.popularidade < 5"
+          >
+            {{ ator.popularidade }}
+          </div>
+        </div>
+
+        <div class="card-body">
+          <h2 class="card-title">{{ ator.nome }}</h2>
+
+          <div class="meta-row">
+            <span class="meta-item">
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ ator.nascimento }}
+            </span>
+          </div>
+
+          <div class="known-label">Conhecido por</div>
+          <div class="genre-list">
+            <span class="genre-pill" *ngFor="let filme of ator.conhecidoPor">{{ filme }}</span>
+          </div>
+
+          <button
+            class="fav-btn"
+            [class.active]="ator.favorito"
+            (click)="$event.stopPropagation(); exibirAlertaFavorito(ator)"
+          >
+            <ion-icon [name]="ator.favorito ? 'star' : 'star-outline'"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

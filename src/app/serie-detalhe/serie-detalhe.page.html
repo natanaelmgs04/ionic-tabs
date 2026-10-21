@@ -1,0 +1,61 @@
+<ion-header class="ion-no-border detail-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/tab2"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="detail-content" *ngIf="serie">
+
+  <!-- Hero Image -->
+  <div class="hero-section">
+    <img class="hero-img" [src]="serie.cartaz" *ngIf="serie.cartaz" />
+    <div class="hero-placeholder" *ngIf="!serie.cartaz">
+      <ion-icon name="tv-off-outline"></ion-icon>
+    </div>
+    <div class="hero-gradient"></div>
+
+    <div class="hero-title-block">
+      <h1 class="hero-title">{{ serie.nome }}</h1>
+    </div>
+  </div>
+
+  <!-- Info Panel -->
+  <div class="info-panel">
+
+    <div class="top-row">
+      <div
+        class="score-circle"
+        [class.score-high]="serie.classificacao >= 7"
+        [class.score-mid]="serie.classificacao >= 5 && serie.classificacao < 7"
+        [class.score-low]="serie.classificacao < 5"
+      >
+        <span class="score-value">{{ serie.classificacao }}</span>
+        <span class="score-label">NOTA</span>
+      </div>
+
+      <div class="meta-stack">
+        <div class="meta-chip">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>{{ serie.lancamento }}</span>
+        </div>
+        <div class="meta-chip">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>{{ serie.duracao }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <p class="section-label">Gêneros</p>
+      <div class="pill-row">
+        <span class="genre-pill" *ngFor="let genero of serie.generos">{{ genero }}</span>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

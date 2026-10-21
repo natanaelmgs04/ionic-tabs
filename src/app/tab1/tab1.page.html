@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="page-header">
+      <div class="header-info">
+        <p class="header-eyebrow">Catálogo</p>
+        <h1 class="header-title">Filmes</h1>
+      </div>
+      <div class="header-icon-wrap">
+        <ion-icon name="film"></ion-icon>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="content-pad">
+
+    <div class="section-label">Em Destaque</div>
+
+    <div class="media-list" *ngIf="listaFilmes">
+      <div
+        class="media-card"
+        *ngFor="let filme of listaFilmes; let i = index"
+        [style.animation-delay]="(i * 60) + 'ms'"
+        (click)="ExibirFilme(filme)"
+      >
+        <div class="poster-wrap">
+          <img class="poster" [src]="filme.cartaz" *ngIf="filme.cartaz" loading="lazy" />
+          <div class="poster-placeholder" *ngIf="!filme.cartaz">
+            <ion-icon name="videocam-off-outline"></ion-icon>
+          </div>
+          <div
+            class="score-badge"
+            [class.score-high]="filme.classificacao >= 7"
+            [class.score-mid]="filme.classificacao >= 5 && filme.classificacao < 7"
+            [class.score-low]="filme.classificacao < 5"
+          >
+            {{ filme.classificacao }}
+          </div>
+        </div>
+
+        <div class="card-body">
+          <h2 class="card-title">{{ filme.nome }}</h2>
+
+          <div class="meta-row">
+            <span class="meta-item">
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ filme.lancamento }}
+            </span>
+            <span class="meta-dot">·</span>
+            <span class="meta-item">
+              <ion-icon name="time-outline"></ion-icon>
+              {{ filme.duracao }}
+            </span>
+          </div>
+
+          <div class="genre-list">
+            <span class="genre-pill" *ngFor="let genero of filme.generos">{{ genero }}</span>
+          </div>
+
+          <button
+            class="fav-btn"
+            [class.active]="filme.favorito"
+            (click)="$event.stopPropagation(); exibirAlertaFavorito(filme)"
+          >
+            <ion-icon [name]="filme.favorito ? 'star' : 'star-outline'"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

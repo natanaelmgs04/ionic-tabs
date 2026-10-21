@@ -1,0 +1,64 @@
+<ion-header class="ion-no-border detail-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="detail-content" *ngIf="filme">
+
+  <!-- Hero Image -->
+  <div class="hero-section">
+    <img class="hero-img" [src]="filme.cartaz" *ngIf="filme.cartaz" />
+    <div class="hero-placeholder" *ngIf="!filme.cartaz">
+      <ion-icon name="videocam-off-outline"></ion-icon>
+    </div>
+    <div class="hero-gradient"></div>
+
+    <div class="hero-title-block">
+      <h1 class="hero-title">{{ filme.nome }}</h1>
+    </div>
+  </div>
+
+  <!-- Info Panel -->
+  <div class="info-panel">
+
+    <!-- Score + Meta row -->
+    <div class="top-row">
+      <div
+        class="score-circle"
+        [class.score-high]="filme.classificacao >= 7"
+        [class.score-mid]="filme.classificacao >= 5 && filme.classificacao < 7"
+        [class.score-low]="filme.classificacao < 5"
+      >
+        <span class="score-value">{{ filme.classificacao }}</span>
+        <span class="score-label">NOTA</span>
+      </div>
+
+      <div class="meta-stack">
+        <div class="meta-chip">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>{{ filme.lancamento }}</span>
+        </div>
+        <div class="meta-chip">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>{{ filme.duracao }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Genres -->
+    <div class="section">
+      <p class="section-label">Gêneros</p>
+      <div class="pill-row">
+        <span class="genre-pill" *ngFor="let genero of filme.generos">{{ genero }}</span>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

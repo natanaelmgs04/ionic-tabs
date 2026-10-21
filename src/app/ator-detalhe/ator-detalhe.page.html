@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border detail-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/tab3"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="detail-content" *ngIf="ator">
+
+  <!-- Hero Image -->
+  <div class="hero-section">
+    <img class="hero-img" [src]="ator.foto" *ngIf="ator.foto" />
+    <div class="hero-placeholder" *ngIf="!ator.foto">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </div>
+    <div class="hero-gradient"></div>
+
+    <div class="hero-title-block">
+      <h1 class="hero-title">{{ ator.nome }}</h1>
+    </div>
+  </div>
+
+  <!-- Info Panel -->
+  <div class="info-panel">
+
+    <div class="top-row">
+      <div
+        class="score-circle"
+        [class.score-high]="ator.popularidade >= 7"
+        [class.score-mid]="ator.popularidade >= 5 && ator.popularidade < 7"
+        [class.score-low]="ator.popularidade < 5"
+      >
+        <span class="score-value">{{ ator.popularidade }}</span>
+        <span class="score-label">POP.</span>
+      </div>
+
+      <div class="meta-stack">
+        <div class="meta-chip">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>Nasc. {{ ator.nascimento }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <p class="section-label">Conhecido por</p>
+      <div class="pill-row">
+        <span class="genre-pill" *ngFor="let filme of ator.conhecidoPor">{{ filme }}</span>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

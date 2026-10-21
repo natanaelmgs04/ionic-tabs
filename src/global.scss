@@ -1,0 +1,148 @@
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Dark mode — always on for cinematic feel */
+@import "@ionic/angular/css/palettes/dark.always.css";
+
+// ─── Reset & Base ────────────────────────────────────────────────────────────
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+ion-app {
+  background: var(--app-background, #090911);
+}
+
+ion-content {
+  --background: #090911;
+}
+
+ion-toolbar {
+  --background: #0c0c18;
+  --border-color: transparent;
+  --border-width: 0;
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+ion-header {
+  &::after {
+    display: none;
+  }
+}
+
+ion-back-button {
+  --color: var(--app-text-primary);
+  --icon-font-size: 22px;
+}
+
+ion-button {
+  --border-radius: var(--app-radius-sm);
+}
+
+// ─── Typography ──────────────────────────────────────────────────────────────
+
+ion-title {
+  --color: var(--app-text-primary);
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+// ─── Alert Overrides ─────────────────────────────────────────────────────────
+
+ion-alert {
+  --background: #1a1a2e;
+  --min-width: 280px;
+
+  .alert-title {
+    color: var(--app-text-primary) !important;
+    font-weight: 700 !important;
+  }
+
+  .alert-message {
+    color: var(--app-text-secondary) !important;
+  }
+
+  .alert-button {
+    color: var(--app-accent-light) !important;
+    font-weight: 600 !important;
+
+    &.alert-button-role-cancel {
+      color: var(--app-text-secondary) !important;
+      font-weight: 400 !important;
+    }
+  }
+}
+
+// ─── Toast Overrides ─────────────────────────────────────────────────────────
+
+ion-toast {
+  --border-radius: var(--app-radius-sm);
+  --box-shadow: var(--app-shadow);
+  font-weight: 600;
+}
+
+// ─── Animations ──────────────────────────────────────────────────────────────
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scalePop {
+  0%   { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+// ─── Skeleton Loader ─────────────────────────────────────────────────────────
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #1a1a2e 25%,
+    #252540 50%,
+    #1a1a2e 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+// ─── Scrollbar (web) ─────────────────────────────────────────────────────────
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--app-border-accent);
+  border-radius: 2px;
+}
